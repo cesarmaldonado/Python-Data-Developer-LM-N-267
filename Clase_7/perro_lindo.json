@@ -1,0 +1,13 @@
+{
+   "perro": {
+      "nombre": "Rocco",
+      "tipo": "perro",
+      "raza": "labrador",
+      "edad": 5,
+      "le_gusta": [
+         "comer",
+         "correr palomas",
+         "ladrar sin parar"
+      ]
+   }
+}
