@@ -6,6 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def hello_flask():
     return 'Hola desde Flask :D'
+#########
 @app.route('/users')
 def usersTwitter():
     users = [
@@ -15,6 +16,16 @@ def usersTwitter():
         {'name' :'bitcoinArg'}
         ]
     response = app.response_class(response = json.dumps(users), status = 200, mimetype = 'application/json')
+    return response
+#########
+@app.route('/users/<path>')
+def searchTwitter(path):
+    if path == 'personas':
+        response = "Aca deberia mostrar un Json de personas"
+    elif path == 'empresas':
+        response = "Aca deberia mostrar un Json de empresas"
+    else: 
+        response = 'No Puedo mostrar lo que estas pidiendo'
     return response
 
 if __name__ == '__main__':
