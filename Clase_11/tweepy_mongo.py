@@ -1,13 +1,13 @@
 import pymongo
 import tweepy
-import json
-import pprint
 
-claves = open('C:/Users\gonza\Documents\Trabajo\EANT\Python\PDP\EANT-PDP-0-MODELO/claves.txt')
+
+claves = open('keys_twitter.txt')
 keys = []
 for clave in claves:
-    clave = clave.strip('\n')
-    keys.append(clave)
+    clave = clave.replace('\n', '')
+    clave = clave.split(',')
+    keys.append(clave[1])
 consumer_key = keys[0]
 consumer_secret = keys[1]
 access_token = keys[2]
@@ -27,7 +27,7 @@ try:
 except:
     ultimo_tweet = None
 
-for tweet in tweepy.Cursor(api.user_timeline, since_id=ultimo_tweet, screen_name = 'alferdez', tweet_mode = 'extended').items(2000):
+for tweet in tweepy.Cursor(api.user_timeline, since_id=ultimo_tweet, screen_name = 'alferdez', tweet_mode = 'extended').items(100):
     #pprint.pprint(tweet._json)#Para ver toda la info de los tutis
     tweet_dic = tweet._json
     tweets.append(tweet_dic)
