@@ -1,10 +1,19 @@
 from flask import Flask, json
+import settings
+from os import environ
+from pymongo import MongoClient 
 
 
 app = Flask(__name__)
 
-# client = pymongo.MongoClient("mongodb+srv://cesarmaldonado:<password>@saopablomydatabase.txlon.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-# db = client.test
+USER = environ['USER']
+PASS = environ['PASS']
+HOST = environ['HOST']
+BASE = environ['BASE']
+
+
+client = MongoClient("mongodb+srv://"+ USER +":"+ PASS +"@"+ HOST+"/"+ BASE +"?retryWrites=true&w=majority")
+
 
 @app.route('/')
 def hello_flask():
@@ -30,6 +39,11 @@ def searchTwitter(path):
     else: 
         response = 'No Puedo mostrar lo que estas pidiendo'
     return response
+#########
+@app.route('/api/tweets')
+def getTweets():
+    print(client.tweets.find())
+    return '{"rta":"ok"}'
 
 if __name__ == '__main__':
     app.run( port = 3030, host= '0.0.0.0')
