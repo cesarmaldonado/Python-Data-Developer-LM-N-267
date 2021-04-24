@@ -42,7 +42,17 @@ def searchTwitter(path):
 #########
 @app.route('/api/tweets')
 def getTweets():
-    print(client.tweets.find())
+    
+    bigdata = client['bigdata']
+    tweets = bigdata['tweets']
+
+    los_tweets = tweets.find()
+
+    for tweet in los_tweets:
+
+        print( tweet['id_str'] )
+
+    
     return '{"rta":"ok"}'
 
 if __name__ == '__main__':
